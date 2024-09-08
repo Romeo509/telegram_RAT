@@ -9,7 +9,7 @@ import tempfile
 import os
 
 # Your bot token
-TOKEN = '6955642805:AAHbixsrUcPRR1FHEc-on-eUs33OdaEbmsI'
+TOKEN = 'place yout tokken here'
 
 # Dictionary to keep track of active clients
 active_clients: Dict[str, str] = {}  # {user_id: device_name}
