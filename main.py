@@ -6,7 +6,7 @@ from media_capture import take_photo, take_screenshot
 from helpers import help_command
 
 # Your bot token
-TOKEN = '6955642805:AAHbixsrUcPRR1FHEc-on-eUs33OdaEbmsI'
+TOKEN = 'Insert your github tokken here'
 
 def main() -> None:
     register_bot_device()
