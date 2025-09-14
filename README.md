@@ -26,14 +26,17 @@ This project allows users to remotely control a device via a Telegram bot. Featu
     pip install -r requirements.txt
     ```
 
-3. Set up your bot token:
+3. Set up your bot token and other configurations:
 
    - Open the `config.py` file.
-   - Replace the `'YOUR_TELEGRAM_BOT_TOKEN'` with the actual token from your bot, which you can get by creating a bot through [BotFather](https://core.telegram.org/bots#botfather).
+   - Replace `'YOUR_TELEGRAM_BOT_TOKEN'` with the actual token from your bot, which you can get by creating a bot through [BotFather](https://core.telegram.org/bots#botfather).
+   - Optionally configure other settings like allowed user IDs, keylogger settings, etc.
 
     ```python
     # config.py
     TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
+    ALLOWED_USER_IDS = []  # Add specific user IDs for enhanced security
+    # ... other settings
     ```
 
 4. Run the bot:
@@ -85,6 +88,27 @@ This project allows users to remotely control a device via a Telegram bot. Featu
 
    Executes the provided command on the device and sends the output (or any errors) to the Telegram chat.
 
+## Security
+
+For enhanced security, you can restrict access to specific Telegram user IDs by adding them to the `ALLOWED_USER_IDS` list in `config.py`:
+```python
+ALLOWED_USER_IDS = [123456789, 987654321]  # Replace with actual user IDs
+```
+
+If you leave this list empty (`ALLOWED_USER_IDS = []`), all Telegram users can interact with the bot.
+
+## Configuration Options
+
+The `config.py` file contains several configurable options:
+
+- `TOKEN`: Your Telegram Bot Token
+- `ALLOWED_USER_IDS`: List of authorized Telegram user IDs
+- `KEYLOGGER_INACTIVE_DURATION`: Seconds of inactivity before adding newline in keylogger
+- `KEYLOGGER_ESC_KEY_STOPS`: Whether ESC key stops the keylogger
+- `WEBCAM_DEVICE_INDEX`: Webcam device index (usually 0)
+- `MOUSE_MOVE_DISTANCE`: Pixels to move mouse in each direction
+- `COMMAND_TIMEOUT`: Timeout for command execution in seconds
+
 ## Requirements
 
 - Python 3.x
@@ -92,4 +116,3 @@ This project allows users to remotely control a device via a Telegram bot. Featu
     - python-telegram-bot
     - pyautogui
     - opencv-python
-

